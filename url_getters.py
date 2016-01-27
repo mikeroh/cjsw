@@ -14,11 +14,8 @@ def get_genres():
         if url.find("http://cjsw.com/genre/") != -1:
             genre_links.append(url)
 
-    genre_links = set(genre_links)
-    for url in genre_links:
-        print url
+    return list(set(genre_links))
 
-    return
 
 def get_programs(genre):
     page = requests.get(genre)
@@ -33,11 +30,7 @@ def get_programs(genre):
         if url.find("http://cjsw.com/program/") != -1:
             program_links.append(url)
 
-    program_links = set(program_links)
-    for url in program_links:
-        print url
-
-    return
+    return list(set(program_links))
 
 def get_shows(program):
     root = 'http://cjsw.com'
@@ -55,8 +48,4 @@ def get_shows(program):
         if url.find(program + 'episode/') != -1:
             show_links.append(root + url)
 
-    show_links = set(show_links)
-    for url in show_links:
-        print url
-
-    return
+    return list(set(show_links))
