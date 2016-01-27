@@ -2,14 +2,41 @@ from url_getters import get_shows
 from url_getters import get_genres
 from url_getters import get_programs
 
-shows = get_shows('http://cjsw.com/program/fade-to-bass-2/')
+genres = get_genres()
 
 print "0 : All"
 i = 1
-for url in shows:
-    print str(i) + " : " + url
+for url in genres:
+    print str(i) + " : " + url[22:-1]
     i += 1
 
+print "\nSelect a genre from the list above."
+print "(Enter number 0 - " + str(len(genres)) + ") :"
+x = None
+while not x:
+    try:
+        x = int(raw_input())
+    except ValueError:
+        print "Sorry, not a number."
+        exit()
 
-print "\nSelect the show you would like to download from the list above"
-print "(Enter number 0 - " + str(len(shows)) + ") :"
+if (x > 0) and (x < len(genres)):
+    programs = get_programs(genres[x-1])
+else:
+    exit()
+
+print "\n\n0 : All"
+i = 1
+for url in programs:
+    print str(i) + " : " + url[24:-1]
+    i += 1
+
+print "\nSelect a program from the list above."
+print "(Enter number 0 - " + str(len(programs)) + ") :"
+x = None
+while not x:
+    try:
+        x = int(raw_input())
+    except ValueError:
+        print "Sorry, not a number."
+        exit()
