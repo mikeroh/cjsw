@@ -46,6 +46,7 @@ def get_shows(program):
 
     for url in links:
         if url.find(program + 'episode/') != -1:
+            url= url + '/'
             show_links.append(root + url)
 
     show_links = list(set(show_links))
