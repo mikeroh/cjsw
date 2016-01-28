@@ -48,4 +48,16 @@ def get_shows(program):
         if url.find(program + 'episode/') != -1:
             show_links.append(root + url)
 
-    return list(set(show_links))
+    show_links = list(set(show_links))
+    show_links.sort()
+    return show_links
+
+
+def get_info(url, program):
+    info = []
+    page = requests.get(url)
+    tree = html.fromstring(page.content)
+    name = tree.xpath('//a[@href="' + program + '"]/@title')[0]
+
+    print name
+    return
