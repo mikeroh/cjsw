@@ -2,8 +2,10 @@ from url_getters import get_shows
 from url_getters import get_genres
 from url_getters import get_programs
 from url_getters import get_info
+
 import urllib
 import sys
+import pathlib
 
 global rem_mp3 # global variable to be used in dlProgress
 
@@ -83,7 +85,7 @@ if (x > 0) and (x < len(shows)+1):
 else:
     exit()
 
-date = shows[x-1].rsplit('/')[-1]
+date = shows[x-1].rsplit('/')[-2]
 date = date[:4] + "-" + date[4:6] + "-" + date[6:]
 
 title = info[0] + ' ' + date +'.mp3'
@@ -91,4 +93,7 @@ rem_mp3 = info[1]
 print title
 
 #Download
-urllib.urlretrieve(rem_mp3, title, reporthook=dlProgress)
+if not pathlib.Path(title).exists():
+    urllib.urlretrieve(rem_mp3, title, reporthook=dlProgress)
+else:
+    print "You already have that one!\n"
