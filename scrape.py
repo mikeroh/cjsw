@@ -3,6 +3,19 @@ from url_getters import get_genres
 from url_getters import get_programs
 from url_getters import get_info
 import urllib
+import sys
+
+global rem_mp3 # global variable to be used in dlProgress
+
+#from http://stackoverflow.com/questions/51212/how-to-write-a-download-progress-indicator-in-python
+def dlProgress(count, blockSize, totalSize):
+    percent = int(count*blockSize*100/totalSize)
+    sys.stdout.write("\r" + rem_mp3 + "...%d%%" % percent)
+    sys.stdout.flush()
+    return
+
+
+#main function
 genres = get_genres()
 
 print "0 : All"
@@ -75,4 +88,7 @@ date = shows[x-1].rsplit('/')[-1]
 date = date[:4] + "-" + date[4:6] + "-" + date[6:]
 
 title = info[0] + ' ' + date +'.mp3'
+rem_mp3 = info[1]
 print title
+
+urllib.urlretrieve(rem_mp3, title, reporthook=dlProgress)
