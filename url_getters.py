@@ -58,6 +58,7 @@ def get_info(url, program):
     page = requests.get(url)
     tree = html.fromstring(page.content)
     name = tree.xpath('//a[@href="' + program + '"]/@title')[0]
+    mp3 = tree.xpath('//button/@data-audio-src')[0]
 
-    print name
+    print mp3
     return
