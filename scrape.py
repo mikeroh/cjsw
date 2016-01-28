@@ -2,7 +2,7 @@ from url_getters import get_shows
 from url_getters import get_genres
 from url_getters import get_programs
 from url_getters import get_info
-
+import urllib
 genres = get_genres()
 
 print "0 : All"
@@ -21,7 +21,7 @@ while not x:
         print "Sorry, not a number."
         exit()
 
-if (x > 0) and (x < len(genres)):
+if (x > 0) and (x < len(genres)+1):
     programs = get_programs(genres[x-1])
 else:
     exit()
@@ -42,7 +42,7 @@ while not x:
         print "Sorry, not a number."
         exit()
 
-if (x > 0) and (x < len(programs)):
+if (x > 0) and (x < len(programs)+1):
     program = programs[x-1]
     shows = get_shows(program)
 else:
@@ -51,7 +51,9 @@ else:
 print "\n\n0 : All"
 i = 1
 for url in shows:
-    print str(i) + " : " + url[-8:-4] + "-" + url[-4:-2] + "-" + url[-2:]
+    date = url.rsplit('/')[-1]
+    date = date[:4] + "-" + date[4:6] + "-" + date[6:]
+    print str(i) + " : " + date
     i += 1
 
 print "\nSelect a show date from the list above."
@@ -64,8 +66,13 @@ while not x:
         print "Sorry, not a number."
         exit()
 
-if (x > 0) and (x < len(shows)):
-    info = []
+if (x > 0) and (x < len(shows)+1):
     info = get_info(shows[x-1], program)
 else:
     exit()
+
+date = shows[x-1].rsplit('/')[-1]
+date = date[:4] + "-" + date[4:6] + "-" + date[6:]
+
+title = info[0] + ' ' + date +'.mp3'
+print title

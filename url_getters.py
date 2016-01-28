@@ -60,5 +60,6 @@ def get_info(url, program):
     name = tree.xpath('//a[@href="' + program + '"]/@title')[0]
     mp3 = tree.xpath('//button/@data-audio-src')[0]
 
-    print mp3
-    return
+    info.append(name)
+    info.append(mp3)
+    return info
