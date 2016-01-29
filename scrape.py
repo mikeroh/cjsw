@@ -1,20 +1,7 @@
-from url_getters import get_shows
-from url_getters import get_genres
-from url_getters import get_programs
-from url_getters import get_info
-
-import urllib
+import os
 import sys
 import pathlib
-
-global rem_mp3 # global variable to be used in dlProgress
-
-#from http://stackoverflow.com/questions/51212/how-to-write-a-download-progress-indicator-in-python
-def dlProgress(count, blockSize, totalSize):
-    percent = int(count*blockSize*100/totalSize)
-    sys.stdout.write("\r" + rem_mp3 + "...%d%%" % percent)
-    sys.stdout.flush()
-    return
+from url_getters import *
 
 def print_options(urls):
     print "\n\n0 : All"
@@ -28,6 +15,15 @@ def print_options(urls):
 #main function
 
 #Genres
+
+if (len(sys.argv) == 2):
+    path = pathlib.Path(sys.argv[1])
+else:
+    abspath = os.path.abspath(__file__)
+    path = os.path.dirname(abspath)
+
+print path
+
 genres = get_genres()
 print_options(genres)
 
@@ -44,7 +40,8 @@ while not x:
 
 #Programs
 if (x > 0) and (x < len(genres)+1):
-    programs = get_programs(genres[x-1])
+    genre = genres[x-1]
+    programs = get_programs(genre)
 else:
     exit()
 
@@ -70,6 +67,9 @@ else:
 print_options(shows)
 print "\nSelect a show date from the list above."
 print "(Enter number 0 - " + str(len(shows)) + ") :"
+path = str(pathlib.Path(str(path) + "/" + genre.rsplit('/')[-2] + "/" + program.rsplit("/")[-2]))
+print path
+
 x = None
 while not x:
     try:
@@ -82,18 +82,10 @@ while not x:
 #Info
 if (x > 0) and (x < len(shows)+1):
     info = get_info(shows[x-1], program)
+    download(info[1], path, info[0], shows[x-1])
+elif (x == 0):
+    for show in shows:
+        info = get_info(show, program)
+        download(info[1], path, info[0], show)
 else:
     exit()
-
-date = shows[x-1].rsplit('/')[-2]
-date = date[:4] + "-" + date[4:6] + "-" + date[6:]
-
-title = info[0] + ' ' + date +'.mp3'
-rem_mp3 = info[1]
-print title
-
-#Download
-if not pathlib.Path(title).exists():
-    urllib.urlretrieve(rem_mp3, title, reporthook=dlProgress)
-else:
-    print "You already have that one!\n"
