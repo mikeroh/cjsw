@@ -66,9 +66,21 @@ def get_info(url, program):
     info = []
     page = requests.get(url)
     tree = html.fromstring(page.content)
-    name = tree.xpath('//a[@href="' + program + '"]/@title')[0]
-    mp3 = tree.xpath('//button/@data-audio-src')[0]
+    namelist = tree.xpath('//a[@href="' + program + '"]/@title')
+    if len(namelist):
+        name = namelist[0]
+    else:
+        info.append(0)
+        return info
 
+    mp3list = tree.xpath('//button/@data-audio-src')
+    if len(mp3list):
+        mp3 = mp3list[0]
+    else:
+        info.append(0)
+        return info
+
+    info.append(1)
     info.append(name)
     info.append(mp3)
     return info
@@ -94,6 +106,7 @@ def download(url, path, album, episode_url):
     #Download
     if not os.path.isfile(title):
         urllib.urlretrieve(rem_mp3, title, reporthook=dlProgress)
+        print "\n"
     else:
         print "You already have that one!\n"
 
