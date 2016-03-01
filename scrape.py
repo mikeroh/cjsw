@@ -4,14 +4,6 @@ import pathlib
 from url_getters import *
 from sys import stdin
 
-def print_options(urls):
-    i = 1
-    for url in urls:
-#        print url.rsplit('/')
-        print str(i) + " : " + url.rsplit('/')[-2]
-        i += 1
-    return
-
 #main function
 
 #Genres

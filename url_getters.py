@@ -93,6 +93,9 @@ def download(url, path, album, episode_url):
     date = date[:4] + "-" + date[4:6] + "-" + date[6:]
 
     title = album + ' ' + date +'.mp3'
+
+    print "Downloading " + title
+
     title = str(pathlib.Path(path + "/" + title))
 
     #Make directory
@@ -127,4 +130,12 @@ def dlProgress(count, blockSize, totalSize):
     percent = int(count*blockSize*100/totalSize)
     sys.stdout.write("\r" + rem_mp3 + "...%d%%" % percent)
     sys.stdout.flush()
+    return
+
+
+def print_options(urls):
+    i = 1
+    for url in urls:
+        print str(i) + " : " + url.rsplit('/')[-2]
+        i += 1
     return
