@@ -6,7 +6,7 @@ from sys import stdin
 
 #main function
 
-#Genres
+#Retrieve and list the genres
 
 if (len(sys.argv) == 2):
     path = pathlib.Path(sys.argv[1])
@@ -27,7 +27,7 @@ except ValueError:
     exit()
 
 
-#Programs
+#Retrieve and list the programs
 if (x > 0) and (x < len(genres)+1):
     genre = genres[x-1]
     programs = get_programs(genre)
@@ -45,7 +45,7 @@ except ValueError:
     exit()
 
 
-#Shows
+#Retrieve and list the shows
 if (x > 0) and (x < len(programs)+1):
     program = programs[x-1]
     shows = get_shows(program)
@@ -64,7 +64,7 @@ except ValueError:
     print "Sorry, not a number."
     exit()
 
-#Info
+#Get the single show, or all shows, if zero was selected.
 if (x > 0) and (x < len(shows)+1):
     info = get_info(shows[x-1], program)
     if(info[0]):
