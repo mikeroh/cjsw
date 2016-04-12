@@ -18,7 +18,7 @@ genres = get_genres()
 print_options(genres)
 
 print "\nSelect a genre from the list above."
-print "(Enter number 0 - " + str(len(genres)) + ") :"
+print "(Enter number 1 - " + str(len(genres)) + ") :"
 
 try:
     x = int(stdin.readline())
@@ -36,7 +36,7 @@ else:
 
 print_options(programs)
 print "\nSelect a program from the list above."
-print "(Enter number 0 - " + str(len(programs)) + ") :"
+print "(Enter number 1 - " + str(len(programs)) + ") :"
 
 try:
     x = int(stdin.readline())
