@@ -5,17 +5,20 @@ from url_getters import *
 from sys import stdin
 
 def show_selection(shows, get_latest):
-    print "\n\n0 : All"
-    print_options(shows)
-    print "\nSelect a show date from the list above."
-    print "(Enter number 0 - " + str(len(shows)) + ") :"
     show_path = str(pathlib.Path(str(path) + "/" + genre.rsplit('/')[-2] + "/" + program.rsplit("/")[-2]))
 
+    if (!get_latest):
+        print "\n\n0 : All"
+        print_options(shows)
+        print "\nSelect a show date from the list above."
+        print "(Enter number 0 - " + str(len(shows)) + ") :"
     try:
         x = int(stdin.readline())
     except ValueError:
         print "Sorry, not a number."
         exit()
+    else:
+        x = len(shows)
 
     #Get the single show, or all shows, if zero was selected.
     if (x > 0) and (x < len(shows)+1):
