@@ -81,6 +81,8 @@ if (x > 0) and (x < len(programs)+1):
     shows = get_shows(program)
     show_selection(shows, False)
 elif (x == 0):
-    show_selection(shows, True)
+    for program in programs:
+        shows = get_shows(program)
+        show_selection(shows, True)
 else:
     exit()
