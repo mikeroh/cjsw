@@ -66,7 +66,7 @@ if (x > 0) and (x < len(genres)+1):
 else:
     exit()
 
-print "\n\n0 : Update " + genre + " for the week"
+print "\n\n0 : Update " + genre.rsplit('/')[-2] + " for the week"
 print_options(programs)
 print "\nSelect a program from the list above."
 print "(Enter number 1 - " + str(len(programs)) + ") :"
