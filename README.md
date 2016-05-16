@@ -12,6 +12,13 @@ pip install requests
 pip install pathlib
 ```
 
+
+Using Debian, the following packages must be installed before getting lxml.
+
+```bash
+apt-get install libxml2-dev libxslt1-dev python-dev
+```
+
 # Use
 In the directory that this project is cloned to, run the command
 
