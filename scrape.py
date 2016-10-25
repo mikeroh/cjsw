@@ -11,9 +11,6 @@ def show_selection(shows, get_latest):
     global genre
     global program
 
-    print path
-    print genre
-    print program
     show_path = str(pathlib.Path(str(path) + "/" + genre.rsplit('/')[-2] + "/" + program.rsplit("/")[-2]))
 
     if (not get_latest):
@@ -84,9 +81,9 @@ def genre_selection(user_genre):
     #Retrieve and list the genres
     genres = get_genres()
     genre = -1
-    print_options(genres)
 
     if(user_genre == ""):
+        print_options(genres)
         print "\nSelect a genre from the list above."
         print "(Enter number 1 - " + str(len(genres)) + ") :"
         try:
