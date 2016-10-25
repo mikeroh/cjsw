@@ -30,7 +30,7 @@ Where ```<target directory>``` is the high level directory to save the podcasts
 into. The script will automatically organize the podcasts into sub directories
 within ```<target directory>``` based on the genre and program.
 
-#As a cron job
+## As a cron job
 ```
 python scrape.py <target directory> <genre>
 ```
