@@ -40,7 +40,7 @@ def get_programs(genre):
 
     return list(set(program_links))
 
-def get_shows(program):
+def get_episodes(program):
     root = 'http://cjsw.com'
     program = program[15:]
 
@@ -50,16 +50,16 @@ def get_shows(program):
 
     #This will create a list of links:
     links = tree.xpath('//a/@href')
-    show_links = []
+    episode_links = []
 
     for url in links:
         if url.find(program + 'episode/') != -1:
             url= url + '/'
-            show_links.append(root + url)
+            episode_links.append(root + url)
 
-    show_links = list(set(show_links))
-    show_links.sort()
-    return show_links
+    episode_links = list(set(episode_links))
+    episode_links.sort()
+    return episode_links
 
 
 def get_info(url, program):
