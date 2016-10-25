@@ -29,3 +29,12 @@ python scrape.py <target directory>
 Where ```<target directory>``` is the high level directory to save the podcasts
 into. The script will automatically organize the podcasts into sub directories
 within ```<target directory>``` based on the genre and program.
+
+##As a cron job
+```
+python scrape.py <target directory> <genre>
+```
+
+For use in a script that requires no user interaction, a specific genre can be
+passed to the scraper. All programs in the genre specified by ```<genre``` will
+have their latest episodes downloaded.
