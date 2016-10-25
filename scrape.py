@@ -7,17 +7,17 @@ from sys import stdin
 global genre
 global program
 
-def show_selection(shows, get_latest):
+def episode_selection(episodes, get_latest):
     global genre
     global program
 
-    show_path = str(pathlib.Path(str(path) + "/" + genre.rsplit('/')[-2] + "/" + program.rsplit("/")[-2]))
+    episode_path = str(pathlib.Path(str(path) + "/" + genre.rsplit('/')[-2] + "/" + program.rsplit("/")[-2]))
 
     if (not get_latest):
         print "\n\n0 : All"
-        print_options(shows)
-        print "\nSelect a show date from the list above."
-        print "(Enter number 0 - " + str(len(shows)) + ") :"
+        print_options(episodes)
+        print "\nSelect a episode date from the list above."
+        print "(Enter number 0 - " + str(len(episodes)) + ") :"
 
         try:
             x = int(stdin.readline())
@@ -25,23 +25,23 @@ def show_selection(shows, get_latest):
             print "Sorry, not a number."
             exit()
     else:
-        #Get the most recent show.
-        x = len(shows)
+        #Get the most recent episode.
+        x = len(episodes)
         if (x == 0):
             exit()
 
-    #Get a single show
-    if (x > 0) and (x < len(shows)+1):
-        info = get_info(shows[x-1], program)
+    #Get a single episode
+    if (x > 0) and (x < len(episodes)+1):
+        info = get_info(episodes[x-1], program)
         if(info[0]):
-            download(info[2], show_path, info[1], shows[x-1])
+            download(info[2], episode_path, info[1], episodes[x-1])
 
     elif (x == 0):
-        #Get all of the shows, if zero was selected.
-        for show in shows:
-            info = get_info(show, program)
+        #Get all of the episodes, if zero was selected.
+        for episode in episodes:
+            info = get_info(episode, program)
             if(info[0]):
-                download(info[2], show_path, info[1], show)
+                download(info[2], episode_path, info[1], episode)
     else:
         exit()
 
@@ -63,16 +63,16 @@ def program_selection(programs, get_latest):
     else:
         x=0
 
-    #Retrieve and list the shows
+    #Retrieve and list the episodes
     if (x > 0) and (x < len(programs)+1):
         program = programs[x-1]
-        shows = get_shows(program)
-        show_selection(shows, False)
+        episodes = get_episodes(program)
+        episode_selection(episodes, False)
     elif (x == 0):
         #Get the most recent episode of every program.
         for program in programs:
-            shows = get_shows(program)
-            show_selection(shows, True)
+            episodes = get_episodes(program)
+            episode_selection(episodes, True)
     else:
         exit()
 
